@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.min.js"></script>
+    </head>
+    <body>
+        <h1>WEB</h1>
+        <style>
+            h1 {
+                font-size: 100px;
+            }
+            main {
+                /* 캔버스가 배경이 되도록 */
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: -1;
+            }
+        </style>
+        <script>
+            // p5js에서 제공하는 기능 사용해보기
+            function setup() {
+                console.log('setup')
+                // 캔버스 사이즈는 화면에 맞춰서
+                createCanvas(windowWidth, windowHeight);
+            }
+
+            function draw() {
+                console.log('draw');
+                // noStroke();
+                // fill(100, 50);
+                const r = Math.random() * 255;
+                const g = Math.random() * 255;
+                const b = Math.random() * 255;
+                noStroke();
+                fill(r, g, b); // 생상 랜덤하게
+                // 원의 크기 랜덤하게, 마우스를 따라오도록
+                circle(mouseX, mouseY, Math.random()*50);
+            }
+        </script>
+    </body>
+</html>

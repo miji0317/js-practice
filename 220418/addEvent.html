@@ -1,0 +1,23 @@
+<html>
+    <body>
+        <!-- onclick과 addEventListener 차이 -->
+        <!-- `onclick`은 중복되는 코드를 재사용할 수 없다.
+        그리고 코드가 길어지면 가독성이 떨어진다.
+        때문에 `addEventListener`로 이벤트 코드를 분리한다. -->
+
+        <input type="button" id="btn1" value="egoing"> 
+        <input type="button" id="btn2" value="duru">
+        <script>
+            // 콜백 함수 -> 나중에 실행되는 함수
+            function func1(evt){  // 파라미터는 자유롭게(evt)
+                alert(evt.target.value); // 이 때 evt의 target은 btn1을 가리킴
+            }
+            function func2(){
+                alert(2);
+            }
+            document.querySelector('#btn1').addEventListener('click', func1);
+            document.querySelector('#btn1').addEventListener('click', func2);
+            document.querySelector('#btn2').addEventListener('click', func1);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,119 @@
+<html>
+    <body>
+        <header>
+            <h1>
+                <a href="/" onclick="
+                    event.preventDefault();
+                    welcome();
+                ">WEB</a>
+            </h1>
+        </header>
+        <nav>
+            <ol>
+                <!-- 
+                    <li><a href="/read/1">html</a></li>
+                    <li><a href="/read/2">css</a></li> 
+                -->
+            </ol>
+        </nav>
+        <article>
+            <!-- 
+                <h2>Welcome</h2>
+                Hello, web 
+            -->
+        </article>
+        <ol id="control">
+            <!-- 
+                <li><a href="/create">Create</a></li>
+                <li><a href="/update">Update</a></li>
+                <li><a href="/delete">Delete</a></li> 
+            -->
+        </ol>
+        <script>
+            const topics = [
+                {id:1, title:'html', body:'html is ...'},
+                {id:2, title:'css', body:'css is ...'},
+                {id:3, title:'js', body:'js is ...'}
+            ];
+            let nextId = 4; // 다음에 들어올 아이디
+
+            let selectedId = null;
+            function navHandler(e){                
+                e.preventDefault(); // 링크가 작동하지 않도록 중지
+                selectedId = Number(e.target.id); // 아이디 값을 알아냄
+                read();
+            }
+
+            function nav(){
+                const tag = topics.map(e=>`
+                    <li>
+                        <a href="/read/${e.id}" id="${e.id}" onclick="navHandler(event);">
+                            ${e.title}
+                        </a>
+                    </li>`).join('');
+                document.querySelector('nav>ol').innerHTML = tag;
+            }
+
+            function welcome(){
+                document.querySelector('article').innerHTML = `<h2>Welcome</h2>Hello,WEB`;
+                selectedId = null;
+                control();
+            }
+
+            function read(){
+                // 아이디와 일치하는 topics의 원소를 찾음
+                // filter는 리턴값을 배열로 주기 때문에 그걸 풀어서 꺼내기 위해서 [0]을 붙여줌
+                const topic = topics.filter(e => e.id === selectedId)[0]; 
+                // 본문 생성 및 출력 
+                const content = `<h2>${topic.title}</h2>${topic.body}`;
+                document.querySelector('article').innerHTML = content;
+                control();
+            }
+
+            function createHandler(e) {
+                e.preventDefault();
+                // form태그에서 name이 title인 것과 body인 것의 값을 가져옴
+                const t = e.target.title.value;
+                const b = e.target.body.value;
+                const newTopic = {id:nextId, title:t, body:b};
+                topics.push(newTopic);
+                nav();
+                selectedId = nextId;
+                nextId = nextId + 1;
+                read();
+            }
+
+            function create(){
+                const content = `
+                    <form onsubmit="createHandler(event);">
+                        <p><input type="text" name="title" placeholder="제목"></p>
+                        <p><textarea name="body" placeholder="본문"></textarea></p>
+                        <p><input type="submit" value="create"></p>
+                    </form>
+                `;
+                document.querySelector('article').innerHTML = content;
+            }
+            function update(){}	
+            function del(){}
+
+            function control(){
+                let contextUI = '' 
+                // 맥락적으로 세팅되는 update와 delete를 contextUI로 지정
+                if (selectedId !== null) {
+                    contextUI = `
+                        <li><a href="/update">Update</a></li>
+                        <li><a href="/delete">Delete</a></li> 
+                    `;
+                }
+                document.querySelector('#control').innerHTML = `
+                    <li><a href="/create" onclick="event.preventDefault(); create();">Create</a></li>
+                    ${contextUI}
+                `;
+            }
+
+            nav();
+            welcome();
+            control();
+        </script>
+    </body>
+</html>

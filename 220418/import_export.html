@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WEB - Welcome</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+
+        <script type="module"> 
+        // 스크립트의 타입을 모듈로 선언하면 웹페이지의 랜더링이 모두 끝난 후 스크립트를 실행
+        // type="module"을 지정하면 defer 속성이 자동으로 부여
+            import {dayNight} from './dayNight.js';
+            function listener(evt){
+                if (evt.target.value === 'night'){
+                    dayNight('night');
+                    evt.target.value = 'day';
+                } else {
+                    dayNight('day');
+                    evt.target.value = 'night';
+                }
+            }
+            document.querySelector('#dayNightBtn').addEventListener('click', listener);
+        </script>
+
+    </head>
+    
+    <body>
+        <!-- 스크립트 코드 별도로 분리하여 연결
+        <script src="daynight.js"></script> -->
+
+        <!-- 야간모드 버튼 -->
+        <input type="button" id="dayNightBtn" value="night">
+
+        <h1><a href="index.html">WEB</a></h1>
+        WWW is <strong>World <u>Wide</u> WEB.</strong><br>
+            
+        <div id="container">
+            <ol>
+                <li><a href="../html/1.html">html</a></li>
+                <li><a href="../html/2.html">css</a></li>
+                <li><a href="../html/3.html">javascript</a></li>
+            </ol>
+            <div>
+                <h2>Welcome</h2>
+                Hello, WEB!!!
+            </div>
+        </div>
+
+    </body>
+</html>

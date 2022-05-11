@@ -1,0 +1,30 @@
+/* 
+* {
+    padding:0px;
+    margin:0px;
+}
+*/
+
+h1 {
+    border-bottom: solid 1px black;
+    padding: 30px;
+    margin-bottom: 0;              
+}
+
+h1 a {
+    text-decoration: none;
+}
+
+ol {
+    margin-top: 0;
+}
+
+@media all and (min-width: 480px) { 
+    #container {
+        display: grid;
+        grid-template-columns: 150px 1fr;
+    }
+    ol {
+        border-right: 1px solid black;
+    }
+}

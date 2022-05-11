@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            // 객체에 담기
+            let topics = [
+                {id: 1, title: 'html', body: 'html is...'},
+                {id: 2, title: 'css', body: 'css is...'},
+                {id: 3, title: 'javascript', body: 'javascript is...'},
+            ]
+        </script>
+    </head>
+    <body>
+        <h1><a href="index.html" onclick="
+            event.preventDefault();
+            document.querySelector('article').innerHTML = `<h2>Welcome</h2>Hello, WEB!`;
+        ">WEB</a></h1>
+        <nav>
+            <ol></ol>
+        </nav>
+
+        <article>
+            <h2>Welcome</h2>
+            Hello, WEB
+        </article>
+
+        <script>
+            // // 함수 작성법 1 - 기본 형식
+            // function nav() {
+            //     let navTag = '';
+            //     for(let i=0; i<topics.length; i++) {
+            //         navTag = navTag + `<li><a href="/read/${topics[i].id}">${topics[i].title}</a></li>`;
+            //         // 파일을 실제로 따로 만드는게 아님
+            //     }
+            //     document.querySelector('nav ol').innerHTML = navTag;
+            //     console.log(navTag);
+            // }
+            // nav();
+
+            // // 함수 작성법 2 - 익명 함수를 변수 nav에 지정
+            // let nav = function () {
+            //     let navTag = '';
+            //     for(let i=0; i<topics.length; i++) {
+            //         navTag = navTag + `<li><a href="/read/${topics[i].id}">${topics[i].title}</a></li>`;
+            //         // 파일을 실제로 따로 만드는게 아님
+            //     }
+            //     document.querySelector('nav ol').innerHTML = navTag;
+            //     console.log(navTag);
+            // }
+            // nav();
+
+            // 함수 작성법 3 - 화살표 함수
+            // 화살표 함수에서 파라미터가 하나일 때는 괄호() 생략 가능
+            // 화살표 함수에서 return 키워드 밖에 없을 때는 중괄호와 리턴도 생략 가능
+            let nav = () => {
+                let navTag = '';
+                for(let i=0; i<topics.length; i++) {
+                    navTag = navTag +
+                        `<li>
+                            <a href="/read/${topics[i].id}" id="${topics[i].id}" onclick="
+                                event.preventDefault();
+                                console.log(event.target.id);
+                                for (let i=0; i<topics.length; i++) {
+                                    if (topics[i].id === Number(event.target.id)) {
+                                        document.querySelector('article').innerHTML = '<h2>' + topics[i].title + '</h2>' + topics[i].body;
+                                        break;
+                                    }
+                                }
+                            ">
+                                ${topics[i].title}
+                            </a>
+                        </li>`;
+                    }
+                    // 기본 동작을 중지시킴
+                    // 아이디 값을 가져와서 topics에서 아이디가 일치하는 애를 찾음
+                    // '<h2>${topics[i].title}</h2>${topics[i].body}' 로도 가능
+                document.querySelector('nav ol').innerHTML = navTag;
+                console.log(navTag);
+            }
+            nav();
+        </script>
+    </body>
+</html>

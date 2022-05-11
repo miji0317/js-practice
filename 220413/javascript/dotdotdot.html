@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <style>
+            .expand {
+                background-color: lightgrey;
+                padding: 0 5px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        JavaScript is <span class="expand"
+        onclick="
+            // 말줄임표를 클릭하면 글씨가 나타나고
+            document.querySelector('#hidden').style.display = 'inline'; 
+            // 말줄임표는 사라짐
+            this.style.display = 'none';
+        ">...</span>
+        
+        <span id="hidden" style="display: none;"">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla maxime fugit sapiente recusandae repudiandae voluptas quo quisquam molestiae rem deserunt, iste autem eaque eos voluptates harum veritatis perspiciatis, doloremque dignissimos!</span>
+
+
+        <hr>  <!-- 다른 방법으로 구현 - innerHTML -->
+        
+
+        JavaScript is <span class="expand"
+        onclick="
+            // innerHTML로 글씨 나타내고
+            document.querySelector('#content').innerHTML = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla maxime fugit sapiente recusandae repudiandae voluptas quo quisquam molestiae rem deserunt, iste autem eaque eos voluptates harum veritatis perspiciatis, doloremque dignissimos!`;
+            // 말줄임표는 사라짐
+            this.style.display = 'none';
+        ">...</span>
+        
+        <span id="content"></span>
+    </body>
+</html>
